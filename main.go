@@ -6,13 +6,12 @@ package main
 
 import (
 	"blihUI/pkg/blih"
-
 	"blihUI/pkg/user"
 )
 
 const (
-	email = ""
-	baseURL = "https://blih.epitech.eu/"
+	email         = ""
+	baseURL       = "https://blih.epitech.eu/"
 	baseUserAgent = "blih-1.7"
 )
 

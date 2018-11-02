@@ -110,7 +110,7 @@ func Info(name string, b *blih.BLIH) (*Repository, error) {
 
 func SetACL(name, acluser, acl string, b *blih.BLIH) error {
 	d := data.Data{"user": acluser, "acl": acl}
-	_, err := b.Request("repository/" + name + "/acls", "POST", &d)
+	_, err := b.Request("repository/"+name+"/acls", "POST", &d)
 	return err
 }
 
