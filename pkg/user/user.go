@@ -9,12 +9,14 @@ import (
 	"github.com/mewbak/gopass"
 )
 
+const prompt = "Mot de passe bocal : "
+
 type User struct {
 	email, token string
 }
 
 func New(email string) *User {
-	password, err := gopass.GetPass("Mot de passe bocal : ")
+	password, err := gopass.GetPass(prompt)
 	if err != nil {
 		panic(err)
 	}

@@ -108,6 +108,12 @@ func Info(name string, b *blih.BLIH) (*Repository, error) {
 	return repo, err
 }
 
+func SetACL(name, acluser, acl string, b *blih.BLIH) error {
+	d := data.Data{"user": acluser, "acl": acl}
+	_, err := b.Request("repository/" + name + "/acls", "POST", &d)
+	return err
+}
+
 func GetACL(name string, b *blih.BLIH) (map[string]string, error) {
 	repository, err := b.Request("repository/"+name+"/acls", "GET", nil)
 	if err != nil {
