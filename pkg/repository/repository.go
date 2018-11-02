@@ -121,12 +121,7 @@ func GetACL(name string, b *blih.BLIH) (map[string]string, error) {
 	}
 	acls := make(map[string]string)
 	for key, value := range repository {
-		s, ok := value.(string)
-		if ok != true {
-			err := errors.New(fmt.Sprintf("key [%s] of repository/%s/acls is not a string", key, name))
-			return nil, err
-		}
-		acls[key] = s
+		acls[key] = value.(string)
 	}
 	return acls, err
 }
