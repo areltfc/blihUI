@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	email         = ""
+	email         = "arthur.delattre@epitech.eu"
 	baseURL       = "https://blih.epitech.eu/"
 	baseUserAgent = "blih-1.7"
 )
