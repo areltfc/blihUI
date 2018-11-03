@@ -6,7 +6,9 @@ package user
 
 import (
 	"blihUI/pkg/token"
-	"github.com/mewbak/gopass"
+	"fmt"
+	"golang.org/x/crypto/ssh/terminal"
+	"syscall"
 )
 
 const prompt = "Mot de passe bocal : "
@@ -16,10 +18,12 @@ type User struct {
 }
 
 func New(email string) *User {
-	password, err := gopass.GetPass(prompt)
+	fmt.Printf(prompt)
+	password, err := terminal.ReadPassword(int(syscall.Stdin))
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println()
 	t := token.Token(password)
 	return &User{email: email, token: t.ToSha512()}
 }
