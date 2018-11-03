@@ -13,34 +13,64 @@ import (
 	"time"
 )
 
+type repositoryInformation string
+
+func (s repositoryInformation) String() string {
+	if s == "" {
+		return "(unknown)"
+	}
+	return string(s)
+}
+
+type repositoryDescription string
+
+func (s repositoryDescription) String() string {
+	if s == "" {
+		return "(none)"
+	}
+	return string(s)
+}
+
 type Repository struct {
-	name, uuid, url, description string
-	public                       bool
-	creation                     time.Time
-	acl                          map[string]string
+	name        string
+	uuid, url   repositoryInformation
+	description repositoryDescription
+	public      bool
+	creation    time.Time
+	acl         map[string]string
 }
 
 func (r *Repository) Name() string {
-	return r.name
+	return string(r.name)
 }
 
 func (r *Repository) UUID() string {
-	return r.UUID()
+	return string(r.uuid)
 }
 
 func (r *Repository) URL() string {
-	return r.url
+	return string(r.url)
+}
+
+func (r *Repository) Description() string {
+	return string(r.description)
+}
+
+func (r *Repository) Public() bool {
+	return r.public
+}
+
+func (r *Repository) Creation() time.Time {
+	return r.creation
+}
+
+func (r *Repository) ACL() map[string]string {
+	return r.acl
 }
 
 func (r Repository) String() string {
-	var description string
-	if r.description != "" {
-		description = r.description
-	} else {
-		description = "(none)"
-	}
 	return fmt.Sprintf("%s (UUID: %s, description: %s, public: %v, url: %s, creation: %s)",
-		r.name, r.uuid, description, r.public, r.url, r.creation)
+		r.name, r.uuid, r.description, r.public, r.url, r.creation)
 }
 
 func List(b *blih.BLIH) ([]Repository, error) {
@@ -87,9 +117,9 @@ func Info(name string, b *blih.BLIH) (*Repository, error) {
 	}
 	repo := &Repository{
 		name:        name,
-		uuid:        infos["uuid"].(string),
-		description: infos["description"].(string),
-		url:         infos["url"].(string),
+		uuid:        repositoryInformation(infos["uuid"].(string)),
+		description: repositoryDescription(infos["description"].(string)),
+		url:         repositoryInformation(infos["url"].(string)),
 	}
 	if repo.description == "None" {
 		repo.description = ""
