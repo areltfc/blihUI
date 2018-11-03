@@ -10,9 +10,10 @@ import (
 )
 
 const (
+	version       = "1.7"
 	email         = ""
 	baseURL       = "https://blih.epitech.eu/"
-	baseUserAgent = "blih-1.7"
+	baseUserAgent = "blih-" + version
 )
 
 func main() {
