@@ -13,31 +13,11 @@ import (
 	"time"
 )
 
-type repositoryInformation string
-
-func (s repositoryInformation) String() string {
-	if s == "" {
-		return "(unknown)"
-	}
-	return string(s)
-}
-
-type repositoryDescription string
-
-func (s repositoryDescription) String() string {
-	if s == "" {
-		return "(none)"
-	}
-	return string(s)
-}
-
 type Repository struct {
-	name        string
-	uuid, url   repositoryInformation
-	description repositoryDescription
-	public      bool
-	creation    time.Time
-	acl         map[string]string
+	name, uuid, url, description string
+	public                       bool
+	creation                     time.Time
+	acl                          map[string]string
 }
 
 func (r *Repository) Name() string {
@@ -117,9 +97,9 @@ func Info(name string, b *blih.BLIH) (*Repository, error) {
 	}
 	repo := &Repository{
 		name:        name,
-		uuid:        repositoryInformation(infos["uuid"].(string)),
-		description: repositoryDescription(infos["description"].(string)),
-		url:         repositoryInformation(infos["url"].(string)),
+		uuid:        infos["uuid"].(string),
+		description: infos["description"].(string),
+		url:         infos["url"].(string),
 	}
 	if repo.description == "None" {
 		repo.description = ""
