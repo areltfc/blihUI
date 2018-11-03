@@ -6,13 +6,11 @@ package main
 
 import (
 	"blihUI/pkg/blih"
-	"blihUI/pkg/sshkey"
 	"blihUI/pkg/user"
-	"fmt"
 )
 
 const (
-	email         = "arthur.delattre@epitech.eu"
+	email         = ""
 	baseURL       = "https://blih.epitech.eu/"
 	baseUserAgent = "blih-1.7"
 )
